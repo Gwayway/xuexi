@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <button id="btn">按我</button></button>
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>
+<script>
+    var ws = new WebSocket('ws://localhost:8080')
+
+    ws.onopen = function (mevt) {
+        console.log('客户端已连接')
+    }
+    ws.onmessage = function (mevt) {
+        console.log('客户端收到消息: ' + mevt.data)
+        ws.close()
+    }
+    ws.onclose = function (mevt) {
+        console.log('连接关闭')
+    }
+</script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="showInfo(666,$event)">{{fullName}}{{tianqi}}</button>
+        <input v-model="tianqi" />
+        <ul>
+            <li v-for="(person, index) in filterPersons" :key="person.id">{{person}}</li>
+        </ul>
+        <div>{{num|dayFilter}}</div>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        Vue.filter('dayFilter', function (v) {
+            return ++v;
+        })
+        // Vue.directive('big', function(){
+
+        // })
+        const vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    message: 'value',
+                    tianqi: '',
+                    num: 10,
+                    s: 'normal',
+                    persons: [{
+                        id: '001',
+                        name: '张三',
+                        age: 34
+                    }, {
+                        id: '002',
+                        name: '绯红',
+                        age: 36
+                    }, {
+                        id: '003',
+                        name: '计算得',
+                        age: 26
+                    }],
+                    car: { name: 'al', s: '4l' }
+                };
+            },
+            methods: {
+                showInfo(a, e) {
+                    console.log(e.target);
+                },
+            },
+            computed: {
+                filterPersons() {
+                    return this.persons.filter((item) => {
+                        return item.age > 27
+                    })
+                },
+                fullName: {
+                    get() {
+                        console.log("get调用！");
+                        return "fdssdfsfsdgs"
+                    },
+                    set() {
+                        console.log("set调用！");
+                    }
+                },
+
+            },
+            watch: {
+                tianqi: {
+                    immediate: true,
+                    deep: true,
+                    handler(newValue, oldValue) {
+                        console.log(newValue, oldValue);
+                    },
+
+                },
+            },
+            filters: {
+
+            },
+            directives:{
+                big:{
+                    bind(){},
+                    inserted(){},
+                    update(){}
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn">发送</button>
+    <div style="width: 100px;height: 100px;border: 1px black solid;">
+
+    </div>
+</body>
+<script>
+    const btn = document.getElementById('btn');
+    // btn.onclick = function () {
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.timeout = 2000;
+    //     xhr.open('GET', 'http://127.0.0.1:8000/student');
+    //     xhr.send();
+    //     xhr.ontimeout = function () {
+    //         console.log("超时了！")
+    //     }
+    //     xhr.onerror = function (err) {
+    //         console.log(err)
+    //     }
+    //     xhr.onreadystatechange = function () {
+    //         if (xhr.readyState === 4) {
+    //             if (xhr.status >= 200 && xhr.status < 300) {
+    //                 console.log(xhr.response)
+    //             }
+    //         }
+    //     }
+
+    // }
+    axios.interceptors.request.use(function (config) {
+        console.log('拦截了请求！');
+        return config;
+    })
+    axios.get('http://127.0.0.1:8000/student').then(res => {
+        console.log(res.data)
+    })
+    // fetch('http://127.0.0.1:8000/student',{}).then(res=>{console.log(res)})
+</script>
+
+</html>
